@@ -6,7 +6,8 @@ LINKER			= ld -m elf_x86_64
 
 RM			= rm -f
 
-SRC			= src/main.s
+SRC			= src/cat_fd.s \
+			  src/main.s
 
 OBJ			= $(SRC:.s=.o)
 
