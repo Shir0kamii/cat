@@ -1,12 +1,13 @@
 NAME			= cat
 
-COMPILER		= nasm -f elf64
+COMPILER		= nasm -f elf
 
-LINKER			= ld -m elf_x86_64
+LINKER			= ld -m elf_i386
 
 RM			= rm -f
 
 SRC			= src/cat_fd.s \
+			  src/cat_file.s \
 			  src/main.s
 
 OBJ			= $(SRC:.s=.o)

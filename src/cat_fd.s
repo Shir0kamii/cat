@@ -5,7 +5,7 @@ section .text:
 	global cat_fd
 
 cat_fd:				; int[rax] cat_fd(int[ebx] fd)
-	mov	rcx, buffer
+	mov	ecx, buffer
 	mov	edx, 0x1000
 	;; mov 	ebx, fd
 	mov	eax, 0x3
@@ -14,14 +14,14 @@ cat_fd:				; int[rax] cat_fd(int[ebx] fd)
 	test	eax, eax
 	jle	.endFile
 
-	push 	rbx
+	push 	ebx
 
 	mov	ebx, 0x1
 	mov	edx, eax
 	mov	eax, 0x4
 	int	0x80
 
-	pop	rbx
+	pop	ebx
 
 	jmp	cat_fd
 

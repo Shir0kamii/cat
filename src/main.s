@@ -2,20 +2,28 @@ section .test
 	global _start
 
 	extern cat_fd
+	extern cat_files
+	extern cat_file
 
 _start:
-	pop	rax
+	pop 	eax
 
-	cmp	rax, 0x1 	; if (argc <= 1)
+	cmp 	eax, 0x1 	; if (argc <= 1)
 	jle	.withoutArg
 .withArg:
+	pop	edi
+	pop	edi
+
+	call	cat_file
+
+	jmp	.exit
 
 .withoutArg:
-	xor	rbx, rbx
+	mov	ebx, 0x0
 	call 	cat_fd
 
 .exitCode:
-	mov	rbx, 0x0
+	mov	eax, 0x0
 .exit:
-	mov	rax, 0x1
+	mov	eax, 0x1
 	int	0x80
