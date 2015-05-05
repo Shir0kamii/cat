@@ -2,7 +2,6 @@ section .test
 	global _start
 
 	extern cat_fd
-	extern cat_files
 	extern cat_file
 
 _start:
@@ -11,12 +10,17 @@ _start:
 	cmp 	eax, 0x1 	; if (argc <= 1)
 	jle	.withoutArg
 .withArg:
+	add	esp, 0x4	; jump argv[0]
+
+.loop:
 	pop	edi
-	pop	edi
+
+	test	edi, edi
+	je	.exitCode
 
 	call	cat_file
 
-	jmp	.exit
+	jmp	.loop
 
 .withoutArg:
 	mov	ebx, 0x0
